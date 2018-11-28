@@ -55,7 +55,7 @@
                                                 </#if>
                                                 <div class="btn-group pull-right">
                                                     <button class="btn btn-xs btn-default btn-group plusBtn" data-id="${menu.id}"><i class="text-muted glyphicon glyphicon-plus"></i></button>
-                                                    <button class="btn btn-xs btn-default btn-group minusBtn" data-id="${menu.id}"><i class="text-muted glyphicon glyphicon-minus"></i></button>
+                                                    <button class="btn btn-xs btn-default btn-group minusBtn" data-menu="${menu}"><i class="text-muted glyphicon glyphicon-minus"></i></button>
                                                 </div>
                                             </td>
                                         </tr>
@@ -64,7 +64,7 @@
                                                 <tr class="warning text-muted" data-toggle="${menu.menuPath}" style="cursor: pointer;display: none;" onclick="showMenuValue(${childOne})">
                                                     <td>&nbsp;&nbsp;&nbsp;&nbsp;<i class="${childOne.cssClass}"></i>&nbsp;${childOne.menuName}
                                                         <div class="btn-group pull-right">
-                                                            <button class="btn btn-xs btn-default btn-group minusBtn" data-id="${childOne.id}"><i class="text-muted glyphicon glyphicon-minus"></i></button>
+                                                            <button class="btn btn-xs btn-default btn-group minusBtn" data-menu="${childOne}"><i class="text-muted glyphicon glyphicon-minus"></i></button>
                                                         </div>
                                                     </td>
                                                 </tr>
@@ -168,10 +168,7 @@
             dataType: "JSON",
             success: function(result) {
                 var trHtml = "";
-                console.log("[result]===" + result);
                 $.each(result, function (i, n) {
-                    console.log(i + "---" + n);
-                    console.log("[childList]===" + n.childList);
                     var hasChild = "";
                     var childList = "";
                     if (n.childList) {
@@ -180,7 +177,7 @@
                            childList +=  "<tr class='warning text-muted' data-toggle='" + n.menuPath + "' style='cursor: pointer;display: none;' onclick='showMenuValue(" + JSON.stringify(c) + ")'>" +
                                             "<td>&nbsp;&nbsp;&nbsp;&nbsp;<i class='" + c.cssClass + "'></i>&nbsp;" + c.menuName +
                                                 "<div class='btn-group pull-right'>" +
-                                                    "<button class='btn btn-xs btn-default btn-group minusBtn' data-id='" + c.id + "'><i class='text-muted glyphicon glyphicon-minus'></i></button>" +
+                                                    "<button class='btn btn-xs btn-default btn-group minusBtn' data-menu='" + JSON.stringify(c) + "'><i class='text-muted glyphicon glyphicon-minus'></i></button>" +
                                                 "</div>" +
                                             "</td>" +
                                         "</tr>";
@@ -192,7 +189,7 @@
                                      "<i class='" + n.cssClass + "'></i>&nbsp;" + n.menuName + hasChild +
                                      "<div class='btn-group pull-right'>" +
                                          "<button class='btn btn-xs btn-default btn-group plusBtn' data-id='" + n.id + "'><i class='text-muted glyphicon glyphicon-plus'></i></button>" +
-                                         "<button class='btn btn-xs btn-default btn-group minusBtn' data-id='" + n.id + "'><i class='text-muted glyphicon glyphicon-minus'></i></button>" +
+                                         "<button class='btn btn-xs btn-default btn-group minusBtn' data-menu='" + JSON.stringify(n) + "'><i class='text-muted glyphicon glyphicon-minus'></i></button>" +
                                      "</div>" +
                                  "</td>" +
                              "</tr>" + childList;
@@ -253,20 +250,29 @@
             }
             if (confirm(msg)){
                 useAjax(path, type, formJson);
-            } else {
-                return null;
             }
         });
 
         $(document).on('click', '.minusBtn', function() {
             if (confirm("是否删除菜单？")){
-                var id = $(this).data("id");
-                var path = "/menu/menu/" + id;
+                if ($.type($(this).data("menu")) == "string") {
+                    eval("var menu = " + $(this).data("menu"));
+                } else {
+                    var menu = $(this).data("menu");
+                }
+                var childList = menu.childList;
+                var ids = [];
+                if (childList) {
+                    $.each(childList, function(i, n) {
+                        ids.push(n.id);
+                    });
+                }
+                ids.push(menu.id);
+
+                var path = "/menu/menu/" + ids;
                 var type = "POST";
                 var formJson = {"_method": "DELETE"};
                 useAjax(path, type, formJson);
-            } else {
-                return null;
             }
         });
     });

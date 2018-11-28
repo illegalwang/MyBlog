@@ -9,4 +9,6 @@ import java.util.List;
  */
 public interface MenuMapper {
     List<SysMenu> selectMenuList();
+
+    void deleteMenusByIds(Integer[] ids);
 }

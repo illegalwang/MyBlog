@@ -1314,7 +1314,7 @@
       <workItem from="1541383891055" duration="32206000" />
       <workItem from="1541473766909" duration="89812000" />
       <workItem from="1541984914067" duration="129530000" />
-      <workItem from="1542681934046" duration="158188000" />
+      <workItem from="1542681934046" duration="158329000" />
     </task>
     <task id="LOCAL-00001" summary="🛠博客管理后台">
       <created>1543375591896</created>
@@ -1351,7 +1351,14 @@
       <option name="project" value="LOCAL" />
       <updated>1543389561556</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="⚙ 配置文件">
+      <created>1543393574312</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1543393574312</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -1387,7 +1394,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="496858000" />
+    <option name="totallyTimeSpent" value="496999000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1450,7 +1457,8 @@
     <MESSAGE value="新建测试" />
     <MESSAGE value="📃 README" />
     <MESSAGE value="📐 测试文件" />
-    <option name="LAST_COMMIT_MESSAGE" value="📐 测试文件" />
+    <MESSAGE value="⚙ 配置文件" />
+    <option name="LAST_COMMIT_MESSAGE" value="⚙ 配置文件" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

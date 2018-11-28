@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -44,8 +45,8 @@ public class MenuServiceImpl implements MenuService {
     }
 
     @Override
-    public void deleteMenu(Integer id) {
-        sysMenuMapper.deleteByPrimaryKey(id);
+    public void deleteMenu(Integer[] ids) {
+        menuMapper.deleteMenusByIds(ids);
     }
 
     public List<SysMenu> createMenuList(List<SysMenu> rootList) {

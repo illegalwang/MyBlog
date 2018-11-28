@@ -52,9 +52,9 @@ public class MenuController {
         return "redirect:/menu/menu";
     }
 
-    @RequestMapping(value = "menu/{id}", method = RequestMethod.DELETE)
-    public String deleteMenu(@PathVariable(value = "id")Integer id) {
-        menuService.deleteMenu(id);
+    @RequestMapping(value = "menu/{ids}", method = RequestMethod.DELETE)
+    public String deleteMenu(@PathVariable(value = "ids")Integer[] ids) {
+        menuService.deleteMenu(ids);
         return "redirect:/menu/menu";
     }
 }

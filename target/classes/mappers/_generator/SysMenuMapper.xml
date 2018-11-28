@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wj.dao.mapper.SysMenuMapper" >
+  <resultMap id="BaseResultMap" type="com.wj.bean.model.SysMenu" >
+    <id column="ID" property="id" jdbcType="INTEGER" />
+    <result column="MENU_NAME" property="menuName" jdbcType="VARCHAR" />
+    <result column="MENU_PATH" property="menuPath" jdbcType="VARCHAR" />
+    <result column="PARENT_ID" property="parentId" jdbcType="INTEGER" />
+    <result column="MENU_SORT" property="menuSort" jdbcType="INTEGER" />
+    <result column="CSS_CLASS" property="cssClass" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    ID, MENU_NAME, MENU_PATH, PARENT_ID, MENU_SORT, CSS_CLASS
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.wj.bean.model.SysMenuExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from sys_menu
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from sys_menu
+    where ID = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from sys_menu
+    where ID = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.wj.bean.model.SysMenuExample" >
+    delete from sys_menu
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.wj.bean.model.SysMenu" >
+    insert into sys_menu (ID, MENU_NAME, MENU_PATH, 
+      PARENT_ID, MENU_SORT, CSS_CLASS
+      )
+    values (#{id,jdbcType=INTEGER}, #{menuName,jdbcType=VARCHAR}, #{menuPath,jdbcType=VARCHAR}, 
+      #{parentId,jdbcType=INTEGER}, #{menuSort,jdbcType=INTEGER}, #{cssClass,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.wj.bean.model.SysMenu" >
+    insert into sys_menu
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="menuName != null" >
+        MENU_NAME,
+      </if>
+      <if test="menuPath != null" >
+        MENU_PATH,
+      </if>
+      <if test="parentId != null" >
+        PARENT_ID,
+      </if>
+      <if test="menuSort != null" >
+        MENU_SORT,
+      </if>
+      <if test="cssClass != null" >
+        CSS_CLASS,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="menuName != null" >
+        #{menuName,jdbcType=VARCHAR},
+      </if>
+      <if test="menuPath != null" >
+        #{menuPath,jdbcType=VARCHAR},
+      </if>
+      <if test="parentId != null" >
+        #{parentId,jdbcType=INTEGER},
+      </if>
+      <if test="menuSort != null" >
+        #{menuSort,jdbcType=INTEGER},
+      </if>
+      <if test="cssClass != null" >
+        #{cssClass,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.wj.bean.model.SysMenuExample" resultType="java.lang.Integer" >
+    select count(*) from sys_menu
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update sys_menu
+    <set >
+      <if test="record.id != null" >
+        ID = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.menuName != null" >
+        MENU_NAME = #{record.menuName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.menuPath != null" >
+        MENU_PATH = #{record.menuPath,jdbcType=VARCHAR},
+      </if>
+      <if test="record.parentId != null" >
+        PARENT_ID = #{record.parentId,jdbcType=INTEGER},
+      </if>
+      <if test="record.menuSort != null" >
+        MENU_SORT = #{record.menuSort,jdbcType=INTEGER},
+      </if>
+      <if test="record.cssClass != null" >
+        CSS_CLASS = #{record.cssClass,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update sys_menu
+    set ID = #{record.id,jdbcType=INTEGER},
+      MENU_NAME = #{record.menuName,jdbcType=VARCHAR},
+      MENU_PATH = #{record.menuPath,jdbcType=VARCHAR},
+      PARENT_ID = #{record.parentId,jdbcType=INTEGER},
+      MENU_SORT = #{record.menuSort,jdbcType=INTEGER},
+      CSS_CLASS = #{record.cssClass,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.wj.bean.model.SysMenu" >
+    update sys_menu
+    <set >
+      <if test="menuName != null" >
+        MENU_NAME = #{menuName,jdbcType=VARCHAR},
+      </if>
+      <if test="menuPath != null" >
+        MENU_PATH = #{menuPath,jdbcType=VARCHAR},
+      </if>
+      <if test="parentId != null" >
+        PARENT_ID = #{parentId,jdbcType=INTEGER},
+      </if>
+      <if test="menuSort != null" >
+        MENU_SORT = #{menuSort,jdbcType=INTEGER},
+      </if>
+      <if test="cssClass != null" >
+        CSS_CLASS = #{cssClass,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.wj.bean.model.SysMenu" >
+    update sys_menu
+    set MENU_NAME = #{menuName,jdbcType=VARCHAR},
+      MENU_PATH = #{menuPath,jdbcType=VARCHAR},
+      PARENT_ID = #{parentId,jdbcType=INTEGER},
+      MENU_SORT = #{menuSort,jdbcType=INTEGER},
+      CSS_CLASS = #{cssClass,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

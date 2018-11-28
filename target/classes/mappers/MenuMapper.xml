@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wj.dao.MenuMapper">
+    <sql id="menuField">
+      ID         "id",
+      MENU_NAME  "menuName",
+      MENU_PATH  "menuPath",
+      PARENT_ID  "parentId",
+      MENU_SORT  "menuSort",
+      CSS_CLASS  "cssClass"
+    </sql>
+    
+    <select id="selectMenuList" resultType="com.wj.bean.model.SysMenu">
+        SELECT 
+        <include refid="menuField"></include>
+        FROM
+        SYS_MENU
+        ORDER BY MENU_SORT, ID
+    </select>
+</mapper>

@@ -234,6 +234,7 @@
         });
 
         $("#saveBtn").on("click", function () {
+            // 获取form中的信息参数
             var formVal = $("form").serializeArray();
             var formJson = {};
             var path = "/menu/menu";

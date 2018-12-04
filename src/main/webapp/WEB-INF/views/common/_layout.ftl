@@ -8,6 +8,7 @@
     <title>${title!""} - wj</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+    <link rel="icon" href="/resources/images/favicon.ico">
     <link rel="stylesheet" href="/resources/bootstrap-3.3.7/css/bootstrap.css">
     <link rel="stylesheet" href="/resources/css/main.css">
     <link rel="stylesheet" href="/resources/mCustomScollbar/jquery.mCustomScrollbar.css">

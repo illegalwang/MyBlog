@@ -2,7 +2,7 @@
 
 <span style="color: red">* 这是一个学习的小demo，一些技术首次集成，所以写的比较乱。但可以为以后的学习做一个参考。</span>
 
-####总结本项目中用到的技术框架 #
+#### 总结本项目中用到的技术框架 #
 
 1. 框架<b>ssm</b>springmvc+spring4.2+mybatis3.4。
 2. 权限框架使用的<b>Shiro 1.3</b>

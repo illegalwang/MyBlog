@@ -2,19 +2,27 @@ package com.wj.controller.shiro;
 
 import com.wj.bean.model.SysUser;
 import com.wj.service.UserService;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authc.credential.DefaultPasswordService;
 import org.apache.shiro.authc.credential.PasswordService;
 import org.apache.shiro.authz.AuthorizationInfo;
+import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.apache.shiro.util.ByteSource;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.HashSet;
+import java.util.Set;
+
 public class MyRealm extends AuthorizingRealm {
 
     @Autowired
     private UserService userService;
+
+    private static final Log log = LogFactory.getLog(MyRealm.class);
 
     /**
      * 认证
@@ -45,12 +53,19 @@ public class MyRealm extends AuthorizingRealm {
 
     /**
      * 授权
+     * 这个方法在访问需要权限的地方就会调用，比如说页面上又shiro标签时，方法上有@RequiresPermissions注释时等。
      *
-     * @param collection
+     * @param principals
      * @return
      */
     @Override
-    protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection collection) {
-        return null;
+    protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
+        log.info("-----进入授权方法，授权开始------------------------------------------------");
+        SysUser user = (SysUser) principals.getPrimaryPrincipal();
+        Set<String> permissions = new HashSet<>();
+        permissions = userService.listPermissionByUserId(user.getUserId());
+        SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
+        info.setStringPermissions(permissions);
+        return info;
     }
 }

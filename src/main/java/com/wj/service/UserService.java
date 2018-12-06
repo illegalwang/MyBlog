@@ -4,6 +4,7 @@ import com.github.pagehelper.PageInfo;
 import com.wj.bean.model.SysUser;
 
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by wisi on 2018/11/6.
@@ -20,4 +21,6 @@ public interface UserService {
     PageInfo<SysUser> selectUserListForPage(int pageNum, int pageSize, int navigatePages);
 
     void editUser(SysUser user);
+
+    Set<String> listPermissionByUserId(String userId);
 }

@@ -23,4 +23,21 @@
         FROM SYS_USER
         ORDER BY USERNAME
     </select>
+    
+    <!-- 查询权限 -->
+    <select id="listPermissionByUserId" parameterType="string" resultType="string">
+        SELECT
+            sp.permission_name
+        FROM
+            sys_permission sp
+        INNER JOIN sys_role sr
+        INNER JOIN sys_role_resource srr
+        INNER JOIN sys_user su
+        INNER JOIN sys_user_role sur ON su.user_id = sur.user_id
+        AND sur.ROLE_ID = sr.ROLE_ID
+        AND sr.ROLE_ID = srr.ROLE_ID
+        AND srr.PERMISSION_ID = sp.ID
+        WHERE
+            su.user_id = #{userId};
+    </select>
 </mapper>

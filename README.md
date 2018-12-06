@@ -53,6 +53,6 @@
     这样就会弹框。</span>
     
 + 使用ajax拼写完导航，再点击导航不起作用。纠结了很长时间。然后使用jquery的事件委托机制完美解决。<br>
-`$("#pageNavDiv a").click(function() {  })`<br>
-`$("#pageNavDiv").on('click', 'a', function() {  })`<br>
+`$("#pageNavDiv a").click(function() {...})`<br>
+`$("#pageNavDiv").on('click', 'a', function() {...})`<br>
 一开始是上面的写法，后来改成下面的写法就可以用了

@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by wisi on 2018/11/6.
@@ -63,5 +64,10 @@ public class UserServiceImpl implements UserService {
         SysUserExample example = new SysUserExample();
         example.createCriteria().andUserIdEqualTo(user.getUserId());
         this.sysUserMapper.updateByExampleSelective(user,example);
+    }
+
+    @Override
+    public Set<String> listPermissionByUserId(String userId) {
+        return userMapper.listPermissionByUserId(userId);
     }
 }

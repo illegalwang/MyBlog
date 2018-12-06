@@ -20,9 +20,11 @@
         <div class="col-md-12">
             <div style="background-color: white;padding: 10px;margin-bottom: 15px;">
                 <!-- 添加按钮 -->
+                <@shiro.hasPermission name="add">
                 <button type="button" class="btn btn-default btn-sm" data-toggle="modal" data-target="#addModal">
                     <span class="text-muted"><i class="glyphicon glyphicon-plus"></i>&nbsp;添加</span>
                 </button>
+                </@shiro.hasPermission>
             </div>
             <div style="background-color: white;padding: 10px 10px 0px 10px;">
                 <table class="table table-hover table-striped">
@@ -40,11 +42,14 @@
                             <td>${user.trueName}</td>
                             <td>
                                 <div class="row">
+                                    <@shiro.hasPermission name="update">
                                     <div class="col-md-6" style="margin: 0px;padding: 0px;">
                                         <button class="pull-right btn btn-default btn-sm editBtn" type="button" data-user="${user}" data-toggle="modal" data-target="#editModal">
                                             <span class="text-muted"><i class="glyphicon glyphicon-pencil"></i>&nbsp;编辑</span>
                                         </button>
                                     </div>
+                                    </@shiro.hasPermission>
+                                    <@shiro.hasPermission name="delete">
                                     <div class="col-md-6" style="margin: 0px;padding: 0px;">
                                         <form action="/user/usermanager/${user.userId}" method="POST">
                                             <input type="hidden" name="_method" value="DELETE">
@@ -53,6 +58,7 @@
                                             </button>
                                         </form>
                                     </div>
+                                    </@shiro.hasPermission>
                                 </div>
                             </td>
                         </tr>

@@ -1,22 +1,22 @@
 # 项目技术总结 #
 
-<span style="color: red">* 第一次总结框架，很多边学边写的，还不成熟。</span>
+<span style="color: red">* 这是一个学习的小demo，一些技术首次集成，所以写的比较乱。但可以为以后的学习做一个参考。</span>
 
-`总结本项目中用到的技术框架`
+####总结本项目中用到的技术框架 #
 
-#### ssm
-+ springmvc + spring + mybatis
-#### Shiro
-+ 简单继承Siro安全框架
-#### freemarker
-+ 
-#### generator
+1. 框架<b>ssm</b>springmvc+spring4.2+mybatis3.4。
+2. 权限框架使用的<b>Shiro 1.3</b>
+3. 前端样式使用的<b>bootstrap 3.3</b>
+4. 前端框架使用的<b>freemarker 2.3</b>
+5. 数据库<b>mysql5.5.6</b>
+6. <b>jdk 1.8</b>
+7. 分页框架<b>pagehelper</b>
+8. <b>generator</b>逆向工程
+9. <b>github</b>版本控制
+10. <b>IntelliJ&nbsp;&nbsp;IDEA&nbsp;&nbsp;2017.1</b> 
+11. <b>tomcat 8.5.34</b>
 
-#### bootstrap
-
-#### 分页使用pagehelper
-
-### 卡住过的问题 #
+#### 卡住过的或现存为解决的问题 #
 
 + IDEA 一开始部署方式不对，导致修改freemarker模板后不能实时更新，
     tomcat应该热部署项目war exploded这种格式
@@ -56,3 +56,9 @@
 `$("#pageNavDiv a").click(function() {...})`<br>
 `$("#pageNavDiv").on('click', 'a', function() {...})`<br>
 一开始是上面的写法，后来改成下面的写法就可以用了
+
+#### 功能概要 #
++ 用户管理，增删改查
++ 菜单的管理，增删改查
++ 用户验证，授权已写可
++ 其它可扩展

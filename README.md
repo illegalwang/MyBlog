@@ -7,7 +7,7 @@
 1. 框架<b>ssm</b>springmvc+spring4.2+mybatis3.4。
 2. 权限框架使用的<b>Shiro 1.3</b>
 3. 前端样式使用的<b>bootstrap 3.3</b>
-4. 前端框架使用的<b>freemarker 2.3</b>
+4. 模板引擎使用的<b>freemarker 2.3</b>
 5. 数据库<b>mysql5.5.6</b>
 6. <b>jdk 1.8</b>
 7. 分页框架<b>pagehelper</b>

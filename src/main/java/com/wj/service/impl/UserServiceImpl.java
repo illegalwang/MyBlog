@@ -11,6 +11,8 @@ import com.wj.util.MD5;
 import com.wj.util.UuidUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Set;
@@ -19,6 +21,7 @@ import java.util.Set;
  * Created by wisi on 2018/11/6.
  */
 @Service
+@Transactional
 public class UserServiceImpl implements UserService {
 
     @Autowired
@@ -38,6 +41,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @Transactional(propagation = Propagation.REQUIRED)
     public void addUser(SysUser user) {
         String userId = UuidUtil.get32UUID();
         String entryptPassword = MD5.nMd5(user.getPassword(), userId);
@@ -47,6 +51,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @Transactional(propagation = Propagation.REQUIRED)
     public void deleteUser(String userId) {
         this.sysUserMapper.deleteByPrimaryKey(userId);
     }
@@ -60,6 +65,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @Transactional(propagation = Propagation.REQUIRED)
     public void editUser(SysUser user) {
         SysUserExample example = new SysUserExample();
         example.createCriteria().andUserIdEqualTo(user.getUserId());

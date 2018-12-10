@@ -6,8 +6,12 @@ import com.wj.dao.MenuMapper;
 import com.wj.dao.mapper.SysMenuMapper;
 import com.wj.service.MenuService;
 import com.wj.util.StringUtils;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -17,7 +21,10 @@ import java.util.List;
  * Created by wisi on 2018/11/21.
  */
 @Service
+@Transactional
 public class MenuServiceImpl implements MenuService {
+
+    private static final Log log = LogFactory.getLog(MenuServiceImpl.class);
 
     @Autowired
     private MenuMapper menuMapper;
@@ -33,18 +40,24 @@ public class MenuServiceImpl implements MenuService {
     }
 
     @Override
+    @Transactional(propagation = Propagation.REQUIRED)
     public void addMenu(SysMenu menu) {
         sysMenuMapper.insertSelective(menu);
     }
 
     @Override
+    @Transactional(propagation = Propagation.REQUIRED)
     public void updateMenu(SysMenu menu) {
+        log.info("------更新菜单信息开始-----------------------------------------------------------");
         SysMenuExample example = new SysMenuExample();
         example.createCriteria().andIdEqualTo(menu.getId());
         sysMenuMapper.updateByExampleSelective(menu, example);
+        System.out.println("MenuServiceImpl.updateMenu");
+        log.info("------更新菜单信息结束-----------------------------------------------------------");
     }
 
     @Override
+    @Transactional(propagation = Propagation.REQUIRED)
     public void deleteMenu(Integer[] ids) {
         menuMapper.deleteMenusByIds(ids);
     }

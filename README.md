@@ -11,7 +11,7 @@
 5. 数据库<b>mysql5.5.6</b>
 6. <b>jdk 1.8</b>
 7. 分页框架<b>pagehelper</b>
-8. <b>generator</b>逆向工程
+8. <b>mybatis generator</b>逆向工程
 9. <b>github</b>版本控制
 10. <b>IntelliJ&nbsp;&nbsp;IDEA&nbsp;&nbsp;2017.1</b> 
 11. <b>tomcat 8.5.34</b>
